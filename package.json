@@ -1,12 +1,16 @@
 {
   "name": "ember-lodash-fp",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.1.0",
+  "description": "lodash/fp for Ember apps",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "lodash",
+    "ember",
+    "fp",
+    "lodash/fp"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Chris Freeman",
   "directories": {
     "doc": "doc",
     "test": "tests"
