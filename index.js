@@ -1,20 +1,15 @@
 'use strict';
 
 const path = require('path');
-// const Funnel = require('broccoli-funnel');
 const MergeTrees = require('broccoli-merge-trees');
-// const Webpack = require('broccoli-webpack');
 const Rollup = require('broccoli-rollup');
-const BabelTranspiler = require('broccoli-babel-transpiler');
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
-// const babel = require('rollup-plugin-babel');
 
 module.exports = {
   name: 'ember-lodash-fp',
 
   included(app) {
-    console.log("INCLUDED");
     this._super.included.apply(this, arguments);
 
     while (typeof app.import !== 'function' && app.app) {
@@ -26,7 +21,7 @@ module.exports = {
 
     const vendor = this.treePaths.vendor;
 
-    app.import(vendor + '/fp.js', {
+    app.import(vendor + '/lodash/fp.js', {
       using: [
         {
           transformation: 'amd',
@@ -49,17 +44,12 @@ module.exports = {
           commonjs()
         ],
         output: {
-          file: 'fp.js',
-          format: 'umd',
+          file: 'lodash/fp.js',
+          format: 'amd',
           name: 'lodash/fp'
         }
       }
     });
-
-    // let babel = this.parent.findAddonByName('ember-cli-babel');
-    // let babelOptions = babel.buildBabelOptions();
-
-
 
     let trees = [rollupTree];
 

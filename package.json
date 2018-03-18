@@ -23,16 +23,11 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-lodash": "^3.3.2",
-    "broccoli-babel-transpiler": "^6.1.4",
     "broccoli-funnel": "^2.0.1",
     "broccoli-merge-trees": "^3.0.0",
     "broccoli-rollup": "^2.0.0",
-    "broccoli-webpack": "^1.0.0",
     "ember-cli-babel": "^6.6.0",
     "lodash": "^4.17.5",
-    "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^8.0.0",
     "rollup-plugin-node-resolve": "^3.3.0"
   },
