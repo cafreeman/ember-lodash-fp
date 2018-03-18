@@ -3,8 +3,8 @@ module.exports = {
   description: '',
 
   afterInstall() {
-    return this.addPackagesToProject([
-      {name: 'lodash', target: '^4.0.0'}
-    ]);
+    // return this.addPackagesToProject([
+    //   {name: 'lodash', target: '^4.0.0'}
+    // ]);
   }
 };

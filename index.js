@@ -1,14 +1,20 @@
 'use strict';
 
 const path = require('path');
-const Funnel = require('broccoli-funnel');
+// const Funnel = require('broccoli-funnel');
 const MergeTrees = require('broccoli-merge-trees');
-const Webpack = require('broccoli-webpack');
+// const Webpack = require('broccoli-webpack');
+const Rollup = require('broccoli-rollup');
+const BabelTranspiler = require('broccoli-babel-transpiler');
+const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
+// const babel = require('rollup-plugin-babel');
 
 module.exports = {
   name: 'ember-lodash-fp',
 
   included(app) {
+    console.log("INCLUDED");
     this._super.included.apply(this, arguments);
 
     while (typeof app.import !== 'function' && app.app) {
@@ -20,7 +26,7 @@ module.exports = {
 
     const vendor = this.treePaths.vendor;
 
-    app.import(vendor + '/lodash/fp.js', {
+    app.import(vendor + '/fp.js', {
       using: [
         {
           transformation: 'amd',
@@ -33,26 +39,34 @@ module.exports = {
   },
 
   treeForVendor(vendorTree) {
-    const lodashFP = new Funnel(path.dirname(require.resolve('lodash/fp')), {
-      destDir: 'lodash',
-      files: ['fp.js']
-    });
+    let lodashPath = path.dirname(require.resolve('lodash'));
 
-    const lodashFPTree = new Webpack([lodashFP], {
-      entry: 'lodash/fp.js',
-      output: {
-        filename: 'lodash/fp.js',
-        library: 'lodash/fp',
-        libraryTarget: 'umd'
+    let rollupTree = new Rollup(lodashPath, {
+      rollup: {
+        input: 'fp.js',
+        plugins: [
+          resolve(),
+          commonjs()
+        ],
+        output: {
+          file: 'fp.js',
+          format: 'umd',
+          name: 'lodash/fp'
+        }
       }
     });
 
-    const trees = [lodashFPTree];
+    // let babel = this.parent.findAddonByName('ember-cli-babel');
+    // let babelOptions = babel.buildBabelOptions();
+
+
+
+    let trees = [rollupTree];
 
     if (vendorTree) {
       trees.push(vendorTree);
     }
 
     return new MergeTrees(trees);
-  }
+  },
 };
