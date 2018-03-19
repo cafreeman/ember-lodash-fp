@@ -1,7 +1,10 @@
 ember-lodash-fp
 ==============================================================================
 
-[Short description of the addon.]
+This addon exposes the `lodash/fp` module to an Ember app (or addon). The entire module can be imported using `import fp from 'lodash/fp'`, or you can import specific functions using es6 destructuring, e.g. `import { map } lodash/fp`.
+
+For documentation on how `lodash/fp` differs from `lodash`, see the FP Guide [here](https://github.com/lodash/lodash/wiki/FP-Guide).
+
 
 Installation
 ------------------------------------------------------------------------------
@@ -11,12 +14,6 @@ ember install ember-lodash-fp
 ```
 
 
-Usage
-------------------------------------------------------------------------------
-
-[Longer description of how to use the addon in apps.]
-
-
 Contributing
 ------------------------------------------------------------------------------
 
@@ -24,18 +21,18 @@ Contributing
 
 * `git clone <repository-url>`
 * `cd ember-lodash-fp`
-* `npm install`
+* `yarn`
 
 ### Linting
 
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+* `yarn lint:js`
+* `yarn lint:js -- --fix`
 
 ### Running tests
 
 * `ember test` – Runs the test suite on the current Ember version
 * `ember test --server` – Runs the test suite in "watch mode"
-* `npm test` – Runs `ember try:each` to test your addon against multiple Ember versions
+* `yarn test` – Runs `ember try:each` to test your addon against multiple Ember versions
 
 ### Running the dummy application
 
