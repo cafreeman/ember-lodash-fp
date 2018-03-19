@@ -25,9 +25,11 @@
   "dependencies": {
     "broccoli-funnel": "^2.0.1",
     "broccoli-merge-trees": "^3.0.0",
-    "broccoli-webpack": "^1.0.0",
+    "broccoli-rollup": "^2.0.0",
     "ember-cli-babel": "^6.6.0",
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.5",
+    "rollup-plugin-commonjs": "^8.0.0",
+    "rollup-plugin-node-resolve": "^3.3.0"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",

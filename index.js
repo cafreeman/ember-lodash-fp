@@ -1,9 +1,10 @@
 'use strict';
 
 const path = require('path');
-const Funnel = require('broccoli-funnel');
 const MergeTrees = require('broccoli-merge-trees');
-const Webpack = require('broccoli-webpack');
+const Rollup = require('broccoli-rollup');
+const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
 
 module.exports = {
   name: 'ember-lodash-fp',
@@ -33,26 +34,29 @@ module.exports = {
   },
 
   treeForVendor(vendorTree) {
-    const lodashFP = new Funnel(path.dirname(require.resolve('lodash/fp')), {
-      destDir: 'lodash',
-      files: ['fp.js']
-    });
+    let lodashPath = path.dirname(require.resolve('lodash'));
 
-    const lodashFPTree = new Webpack([lodashFP], {
-      entry: 'lodash/fp.js',
-      output: {
-        filename: 'lodash/fp.js',
-        library: 'lodash/fp',
-        libraryTarget: 'umd'
+    let rollupTree = new Rollup(lodashPath, {
+      rollup: {
+        input: 'fp.js',
+        plugins: [
+          resolve(),
+          commonjs()
+        ],
+        output: {
+          file: 'lodash/fp.js',
+          format: 'amd',
+          name: 'lodash/fp'
+        }
       }
     });
 
-    const trees = [lodashFPTree];
+    let trees = [rollupTree];
 
     if (vendorTree) {
       trees.push(vendorTree);
     }
 
     return new MergeTrees(trees);
-  }
+  },
 };
